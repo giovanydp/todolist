@@ -1,0 +1,152 @@
+body {
+    background: url('rawa.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.wadah {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.tugas.selesai {
+    background: #d4edda;
+    border-left: 5px solid #28a745;
+    color: #155724;
+}
+
+.tugas.selesai h3 {
+    text-decoration: line-through;
+}
+
+.tugas input[type="checkbox"] {
+    margin-bottom: 10px;
+}
+
+.tugas.selesai input[type="checkbox"] {
+    cursor: not-allowed;
+}
+
+.tombol-tambah {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tombol-tambah:hover {
+    background: #0056b3;
+}
+
+.daftar-tugas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tugas {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.tugas input[type="checkbox"] {
+    margin-right: 15px;
+    transform: scale(1.2);
+}
+
+.info-tugas {
+    flex-grow: 1;
+}
+
+.tugas h3 {
+    margin: 0 0 5px;
+}
+
+.tugas p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.tenggat {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: red;
+}
+
+.selesai h3,
+.selesai p,
+.selesai .tenggat {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.sub-selesai {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.tombol-edit {
+    background-color: #ffc107;
+    color: black;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.tombol-hapus {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.tombol-hapus:hover {
+    background-color: #c82333;
+}
+
+.tombol-keluar {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.tombol-keluar:hover {
+    background-color: #c82333;
+}
+
+
+
+

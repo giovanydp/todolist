@@ -1,0 +1,106 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    background: url('rawa.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.wadah {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+input, textarea, button {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+input[type="text"], input[type="datetime-local"], textarea {
+    background-color: #fafafa;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button[type="button"] {
+    background-color: #28a745;
+    color: white;
+}
+
+button[type="button"]:hover {
+    background-color: #218838;
+}
+
+/* Input fields for subtasks */
+#subtugas-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.subtugas-item {
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .wadah {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    input, textarea, button {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
