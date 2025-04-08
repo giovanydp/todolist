@@ -1,33 +1,39 @@
 <?php
 include("koneksi.php");
 
-$error_message = "";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    $sql_check = "SELECT id FROM users WHERE username = ?";
-    $stmt_check = $db->prepare($sql_check);
-    $stmt_check->bind_param("s", $username);
-    $stmt_check->execute();
-    $stmt_check->store_result();
+    if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+        echo "<script>alert('❌ Username hanya boleh huruf dan angka!'); window.location='register.php';</script>";
+        exit;
+    }
 
-    if ($stmt_check->num_rows > 0) {
-        $error_message = "Username telah dipakai. Silakan pilih username lain.";
+    if (strlen($password) < 8) {
+        echo "<script>alert('❌ Password harus minimal 8 karakter!'); window.location='register.php';</script>";
+        exit;
+    }
+    
+    // Periksa apakah username sudah ada di database
+    $query_check = "SELECT * FROM users WHERE username = '$username'";
+    $result_check = mysqli_query($db, $query_check);
+    if (mysqli_num_rows($result_check) > 0) {
+        echo "<script>alert('❌ Username telah terdaftar! Silakan pilih username lain.'); window.location='register.php';</script>";
+        exit;
+    }
+
+    $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = "INSERT INTO users (username, password) VALUES ('$username', '$password_hashed')";
+    if (mysqli_query($db, $query)) {
+        echo "<script>alert('✅ Registrasi berhasil! Silakan login.'); window.location='login.php';</script>";
     } else {
-        $sql_insert = "INSERT INTO users (username, password) VALUES (?, ?)";
-        $stmt_insert = $db->prepare($sql_insert);
-        $stmt_insert->bind_param("ss", $username, $password);
-        if ($stmt_insert->execute()) {
-            header("Location: login.php?status=register_sukses");
-            exit;
-        } else {
-            $error_message = "Registrasi gagal. Silakan coba lagi.";
-        }
+        echo "<script>alert('❌ Gagal mendaftar!'); window.location='register.php';</script>";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -49,25 +55,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             align-items: center;
             height: 100vh;
         }
+        button, .register-button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .register-button {
+            text-align: center;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="wadah">
+    <div class="regis">
         
         
         <?php if (!empty($error_message)) : ?>
             <p class="peringatan"><?= $error_message; ?></p>
         <?php endif; ?>
-
-        <form action="" method="POST">
+ 
+        <form method="POST" action="register.php" onsubmit="return validateForm()">
         <h2>Daftar Akun</h2>
-            <label>Username:</label>
-            <input type="text" name="username" required>
-            
-            <label>Password:</label>
-            <input type="password" name="password" required>
-
-            <button type="submit">Daftar</button>
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Register</button>
+        <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
+        <a href="login.php" class="register-button">kembali</a>
         </form>
     </div>
 </body>

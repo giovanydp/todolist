@@ -19,8 +19,15 @@
                 <textarea name="deskripsi" required></textarea>
             </p>
             <p>
-                <label for="tenggat">Tenggat:</label>
-                <input type="datetime-local" name="tenggat" required>
+                <label for="tenggat">Tenggat Waktu:</label>
+                    <input type="datetime-local" name="tenggat" id="tenggat" required>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                            let sekarang = new Date();
+                            sekarang.setMinutes(sekarang.getMinutes() - sekarang.getTimezoneOffset()); 
+                            document.getElementById("tenggat").min = sekarang.toISOString().slice(0, 16);
+                            });
+                        </script>
             </p>
 
             <h4>Subtugas:</h4>
@@ -29,13 +36,15 @@
                     <input type="text" name="subtugas[]" placeholder="Nama subtugas" required>
                 </div>
             </div>
-            <button type="button" id="tambah-subtugas">Tambah Subtugas</button>
-            <p><button type="submit" name="tambah_tugas">Tambah Tugas</button></p>
+            <button id="tambah-subtugas">Tambah Subtugas</button>
+            <p><button name="tambah_tugas">Tambah Tugas</button></p>
+            <p>
+                <button onclick="window.location.href='halaman.php'">Kembali</button>
+            </p>
         </form>
     </div>
 
     <script>
-        // Menambahkan input untuk subtugas
         document.getElementById('tambah-subtugas').addEventListener('click', function() {
             var container = document.getElementById("subtugas-container");
             var input = document.createElement("input");

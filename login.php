@@ -65,8 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100%;
             margin-top: 10px;
         }
+        .login {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
     </style>
 </head>
+<div class="login">
 <body>
     <form method="POST" action="">
         <h2>Login</h2>
@@ -79,4 +89,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="register.php" class="register-button">Register</a>
     </form>
 </body>
+</div>
 </html>

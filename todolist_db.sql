@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2025 at 01:00 AM
+-- Generation Time: Feb 16, 2025 at 03:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,25 +34,6 @@ CREATE TABLE `subtugas` (
   `status` enum('belum','selesai') DEFAULT 'belum'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `subtugas`
---
-
-INSERT INTO `subtugas` (`id`, `tugas_id`, `nama_subtugas`, `status`) VALUES
-(1, 6, 'asd', 'belum'),
-(2, 6, 'asd', 'belum'),
-(22, 15, 'asd', 'belum'),
-(23, 15, 'asdasd', 'belum'),
-(24, 16, 'asdasd', 'belum'),
-(25, 16, 'asdasd', 'belum'),
-(26, 17, 'asdasd', 'belum'),
-(27, 17, 'asd', 'belum'),
-(28, 18, 'asda', 'belum'),
-(29, 18, 'asdasda', 'selesai'),
-(30, 19, 'asd', 'belum'),
-(31, 19, 'asd', 'selesai'),
-(34, 20, 'easa', '');
-
 -- --------------------------------------------------------
 
 --
@@ -65,25 +46,8 @@ CREATE TABLE `tugas` (
   `nama_tugas` varchar(255) NOT NULL,
   `deskripsi` text DEFAULT NULL,
   `tenggat` datetime DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 0
+  `status` tinyint(2) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tugas`
---
-
-INSERT INTO `tugas` (`id`, `user_id`, `nama_tugas`, `deskripsi`, `tenggat`, `status`) VALUES
-(2, 2, 'tugas rumah', 'a', '2025-02-04 05:19:00', 1),
-(3, 5, 'tugas rumah', 'asd', '2025-02-04 05:34:00', 1),
-(4, 2, 'ads', 'asd', '2025-02-04 05:39:00', 1),
-(5, 2, 'asd', 'asd', '2025-02-01 05:42:00', 0),
-(6, 3, 'asda', 'asd', '2025-02-04 06:03:00', 1),
-(15, 1, 'sdfsdf', 'sdfsdf', '2025-02-04 06:43:00', 1),
-(16, 1, 'asd', 'asd', '2025-02-04 06:45:00', 1),
-(17, 1, 'ads', 'asd', '2025-02-04 06:46:00', 1),
-(18, 1, 'asdas', 'asdasd', '2025-02-04 06:47:00', 1),
-(19, 1, 'asd', 'asd', '2025-02-04 06:47:00', 1),
-(20, 1, 'asd', 'asd', '2025-02-04 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -105,7 +69,8 @@ INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (1, 'giovanys', 'akusukangoding'),
 (2, 'giovany', '12345678'),
 (3, 'iniel', '12345678'),
-(5, 'ikan', 'akuikan');
+(5, 'ikan', 'akuikan'),
+(6, 'admin', 'admin123');
 
 --
 -- Indexes for dumped tables
@@ -140,19 +105,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `subtugas`
 --
 ALTER TABLE `subtugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

@@ -1,11 +1,9 @@
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Global Styles */
 body {
     background: url('rawa.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -21,6 +19,7 @@ body {
 .wadah {
     background: white;
     width: 100%;
+    height: 100%;
     max-width: 600px;
     padding: 20px;
     border-radius: 8px;
@@ -65,16 +64,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-button[type="button"] {
-    background-color: #28a745;
-    color: white;
-}
-
-button[type="button"]:hover {
-    background-color: #218838;
-}
-
-/* Input fields for subtasks */
 #subtugas-container {
     display: flex;
     flex-direction: column;
@@ -84,7 +73,6 @@ button[type="button"]:hover {
     margin-bottom: 10px;
 }
 
-/* Responsive Design */
 @media screen and (max-width: 768px) {
     .wadah {
         width: 90%;

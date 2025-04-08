@@ -15,7 +15,6 @@ if (!isset($_GET['id'])) {
 
 $tugas_id = $_GET['id'];
 
-// Ambil data tugas
 $sql_tugas = "SELECT * FROM tugas WHERE id = $tugas_id AND user_id = $user_id";
 $result_tugas = mysqli_query($db, $sql_tugas);
 $tugas = mysqli_fetch_assoc($result_tugas);
@@ -25,13 +24,10 @@ if (!$tugas) {
     exit;
 }
 
-// Ambil data subtugas
 $sql_subtugas = "SELECT * FROM subtugas WHERE tugas_id = $tugas_id";
 $result_subtugas = mysqli_query($db, $sql_subtugas);
 
-// Update tugas
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Update tugas
     if (isset($_POST['nama_tugas'])) {
         $nama_tugas = mysqli_real_escape_string($db, $_POST['nama_tugas']);
         $deskripsi = mysqli_real_escape_string($db, $_POST['deskripsi']);
@@ -41,14 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($db, $sql_update);
     }
 
-    // Tambah subtugas baru
     if (!empty($_POST['nama_subtugas'])) {
         $nama_subtugas = mysqli_real_escape_string($db, $_POST['nama_subtugas']);
         $sql_insert_sub = "INSERT INTO subtugas (tugas_id, nama_subtugas, status) VALUES ($tugas_id, '$nama_subtugas', 'belum selesai')";
         mysqli_query($db, $sql_insert_sub);
     }
 
-    // Ubah subtugas
     if (isset($_POST['subtugas_id']) && isset($_POST['nama_subtugas_edit'])) {
         $subtugas_id = $_POST['subtugas_id'];
         $nama_subtugas_edit = mysqli_real_escape_string($db, $_POST['nama_subtugas_edit']);
@@ -56,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_query($db, $sql_update_sub);
     }
 
-    // Hapus subtugas
     if (isset($_POST['hapus_subtugas_id'])) {
         $hapus_subtugas_id = $_POST['hapus_subtugas_id'];
         $sql_delete_sub = "DELETE FROM subtugas WHERE id=$hapus_subtugas_id AND tugas_id=$tugas_id";
@@ -87,8 +80,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="deskripsi">Deskripsi:</label>
         <textarea name="deskripsi" required><?= htmlspecialchars($tugas['deskripsi']) ?></textarea>
 
-        <label for="tenggat">Tenggat:</label>
-        <input type="date" name="tenggat" value="<?= $tugas['tenggat'] ?>" required>
+        <label for="tenggat">Tenggat Waktu:</label>
+                    <input type="datetime-local" name="tenggat" id="tenggat" value="<?= htmlspecialchars($tugas['tenggat']) ?>" required>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                            let sekarang = new Date();
+                            sekarang.setMinutes(sekarang.getMinutes() - sekarang.getTimezoneOffset()); 
+                            document.getElementById("tenggat").min = sekarang.toISOString().slice(0, 16);
+                            });
+                        </script>
 
         <button type="submit">Simpan Perubahan</button>
     </form>
@@ -98,14 +98,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php while ($subtugas = mysqli_fetch_assoc($result_subtugas)): ?>
             <li>
                 <?= htmlspecialchars($subtugas['nama_subtugas']); ?>
-                <!-- Form untuk mengubah nama subtugas -->
                 <form action="edit_tugas.php?id=<?= $tugas_id ?>" method="POST" style="display:inline;">
                     <input type="hidden" name="subtugas_id" value="<?= $subtugas['id'] ?>">
                     <input type="text" name="nama_subtugas_edit" value="<?= htmlspecialchars($subtugas['nama_subtugas']); ?>" required>
                     <button type="submit">Ubah</button>
                 </form>
 
-                <!-- Form untuk menghapus subtugas -->
                 <form action="edit_tugas.php?id=<?= $tugas_id ?>" method="POST" style="display:inline;">
                     <input type="hidden" name="hapus_subtugas_id" value="<?= $subtugas['id'] ?>">
                     <button type="submit">Hapus</button>
@@ -119,8 +117,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="nama_subtugas">Nama Subtugas:</label>
         <input type="text" name="nama_subtugas" required>
         <button type="submit">Tambah Subtugas</button>
+        <p>
+            <button onclick="window.location.href='halaman.php'">Kembali</button>
+        </p>
     </form>
 </div>
 
 </body>
 </html>
+
