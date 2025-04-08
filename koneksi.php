@@ -1,4 +1,3 @@
-
 <?php
 $server = "sql12.freesqldatabase.com";
 $user = "sql12771618";
