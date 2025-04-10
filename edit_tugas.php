@@ -67,7 +67,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Tugas</title>
-    <link rel="stylesheet" href="gaya.css">
+    <style>
+        body {
+            background: url('rawa.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .wadah {
+            max-width: 500px;
+            background-color: white;
+            padding: 30px;
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+        }
+        h2, h3 {
+            text-align: center;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -91,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </script>
 
         <button type="submit">Simpan Perubahan</button>
-    </form>
+    
 
     <h3>Subtugas</h3>
     <ul>
@@ -112,14 +155,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endwhile; ?>
     </ul>
 
-    <h3>Tambah Subtugas Baru</h3>
-    <form action="edit_tugas.php?id=<?= $tugas_id ?>" method="POST">
+        <h3>Tambah Subtugas Baru</h3>
+        <form action="edit_tugas.php?id=<?= $tugas_id ?>" method="POST">
         <label for="nama_subtugas">Nama Subtugas:</label>
         <input type="text" name="nama_subtugas" required>
         <button type="submit">Tambah Subtugas</button>
         <p>
             <button onclick="window.location.href='halaman.php'">Kembali</button>
         </p>
+        </form>
     </form>
 </div>
 
