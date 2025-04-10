@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Jakarta");
 session_start();
 include("koneksi.php");
 
@@ -15,7 +16,10 @@ $result_jumlah_terlambat = mysqli_query($db, $sql_jumlah_terlambat);
 $row_jumlah_terlambat = mysqli_fetch_assoc($result_jumlah_terlambat);
 $jumlah_terlambat = $row_jumlah_terlambat['jumlah'];
 
-$sql_kadaluarsa = "SELECT nama_tugas FROM tugas WHERE user_id = $user_id AND status = 0 AND tenggat BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 1 HOUR)";
+$one_hour_later = date("Y-m-d H:i:s", strtotime('+1 hour'));
+$now = date("Y-m-d H:i:s");
+$sql_kadaluarsa = "SELECT nama_tugas FROM tugas WHERE user_id = $user_id AND status = 0 AND tenggat BETWEEN '$now' AND '$one_hour_later'";
+
 $result_kadaluarsa = mysqli_query($db, $sql_kadaluarsa);
 $tugas_kadaluarsa = [];
 
@@ -23,7 +27,8 @@ while ($row = mysqli_fetch_assoc($result_kadaluarsa)) {
     $tugas_kadaluarsa[] = $row['nama_tugas'];
 }
 
-$sql_update_terlambat = "UPDATE tugas SET status = 2 WHERE status = 0 AND tenggat < NOW()";
+$now = date("Y-m-d H:i:s");
+$sql_update_terlambat = "UPDATE tugas SET status = 2 WHERE status = 0 AND tenggat < '$now'";
 mysqli_query($db, $sql_update_terlambat);
 
 $sql_tugas = "SELECT * FROM tugas WHERE user_id = $user_id AND status = 0 ORDER BY tenggat ASC";
@@ -34,7 +39,6 @@ $result_terlambat = mysqli_query($db, $sql_terlambat);
 
 $sql_selesai = "SELECT * FROM tugas WHERE user_id = $user_id AND status = 1 ORDER BY tenggat ASC";
 $result_selesai = mysqli_query($db, $sql_selesai);
-
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['tugas_id'])) {
