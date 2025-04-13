@@ -17,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
             
-            if ($password == $user['password']) { 
+            // Perbandingan yang benar dengan password_hash
+            if (password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 header('Location: halaman.php');
                 exit;
@@ -33,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -40,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: url('rawa.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
@@ -66,18 +68,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin-top: 10px;
         }
         .login {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+            margin: 20px;
+        }
     </style>
 </head>
-<div class="login">
 <body>
+<div class="login">
     <form method="POST" action="">
         <h2>Login</h2>
         <label for="username">Username:</label>
@@ -88,6 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php if (isset($error)) echo "<p style='color: red;'>$error</p>"; ?>
         <a href="register.php" class="register-button">Register</a>
     </form>
-</body>
 </div>
+</body>
 </html>
